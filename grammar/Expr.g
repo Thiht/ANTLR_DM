@@ -25,10 +25,14 @@ expr returns [int value]
     ;
 
 multExpr returns [int value]
-    :   e=atom {$value = $e.value;}
-        (   '*' e=atom {$value *= $e.value;}
-        |   '/' e=atom {$value /= $e.value;}
+    :   e=powerExpr {$value = $e.value;}
+        (   '*' e=powerExpr {$value *= $e.value;}
+        |   '/' e=powerExpr {$value /= $e.value;}
         )*
+    ;
+
+powerExpr returns [int value]
+    :   e=atom {$value = $e.value;} ( '^' e=powerExpr {$value = (int) Math.pow($value, $e.value);})?
     ;
 
 atom returns [int value]
