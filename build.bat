@@ -1,3 +1,4 @@
+@echo off
 rd /s /q .\target
 md .\target
 java -cp ".\lib\antlr-3.5.2-complete.jar" org.antlr.Tool .\grammar\Expr.g -fo .\target
